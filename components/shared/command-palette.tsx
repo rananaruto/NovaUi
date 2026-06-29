@@ -3,9 +3,8 @@
 import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Search, ArrowRight, FileText, Layout, Zap, BookOpen } from "lucide-react";
+import { Search, ArrowRight } from "lucide-react";
 import { components as componentData } from "@/data/components";
-import { templates } from "@/data/templates";
 
 interface CommandPaletteProps {
   open: boolean;
@@ -17,6 +16,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
   const router = useRouter();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (open) setQuery("");
   }, [open]);
 
@@ -33,8 +33,6 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
       return [
         { type: "page" as const, icon: "🏠", label: "Home", href: "/" },
         { type: "page" as const, icon: "📦", label: "Components", href: "/components" },
-        { type: "page" as const, icon: "🎨", label: "Templates", href: "/templates" },
-        { type: "page" as const, icon: "✨", label: "Animations", href: "/animations" },
         { type: "page" as const, icon: "📖", label: "Documentation", href: "/docs" },
       ];
     }
@@ -51,18 +49,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
         subtitle: c.category,
       }));
 
-    const templateResults = templates
-      .filter((t) => t.name.toLowerCase().includes(q) || t.tags.some((tag) => tag.includes(q)))
-      .slice(0, 3)
-      .map((t) => ({
-        type: "template" as const,
-        icon: "🎨",
-        label: t.name,
-        href: "/templates",
-        subtitle: t.category,
-      }));
-
-    return [...componentResults, ...templateResults];
+    return componentResults;
   }, [query]);
 
   return (

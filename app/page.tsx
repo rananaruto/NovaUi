@@ -132,11 +132,10 @@ export default function HomePage() {
       {/* Stats */}
       <section className="relative py-16 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {[
               { value: "40+", label: "Components", icon: <Box className="w-5 h-5" /> },
               { value: "12", label: "Categories", icon: <Palette className="w-5 h-5" /> },
-              { value: "5", label: "Templates", icon: <Code className="w-5 h-5" /> },
               { value: "100%", label: "TypeScript", icon: <Zap className="w-5 h-5" /> },
             ].map((stat, i) => (
               <motion.div

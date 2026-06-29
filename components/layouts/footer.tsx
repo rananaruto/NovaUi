@@ -8,8 +8,6 @@ const footerLinks = [
     title: "Product",
     items: [
       { label: "Components", href: "/components" },
-      { label: "Templates", href: "/templates" },
-      { label: "Animations", href: "/animations" },
       { label: "Documentation", href: "/docs" },
     ],
   },

@@ -72,20 +72,8 @@ function highlightSyntax(line: string, language: string): React.ReactNode {
 
   // Simple TSX/JS highlighting
   const parts: React.ReactNode[] = [];
-  let remaining = line;
+  const remaining = line;
   let key = 0;
-
-  const patterns: [RegExp, string][] = [
-    [/^(\s*)(\/\/.*)$/, "text-gray-500"],
-    [/^(\s*)(import|export|from|default|const|let|var|function|return|if|else|interface|type|async|await)\b/, "text-violet-400"],
-    [/"([^"]*)"/, "text-emerald-400"],
-    [/'([^']*)'/, "text-emerald-400"],
-    [/`([^`]*)`/, "text-emerald-400"],
-    [/\b(true|false|null|undefined|void)\b/, "text-amber-400"],
-    [/\b(\d+)\b/, "text-amber-400"],
-    [/<\/?([A-Z]\w*)/, "text-cyan-400"],
-    [/(className|onClick|onChange|key|href|type|value)=/, "text-purple-400"],
-  ];
 
   // Apply simple token coloring
   if (remaining.trim().startsWith("//")) {
@@ -99,22 +87,11 @@ function highlightSyntax(line: string, language: string): React.ReactNode {
     }
   }
 
-  // Keyword highlighting
-  const keywords = /\b(import|export|from|default|const|let|var|function|return|if|else|interface|type|async|await|typeof|extends|implements|new|class|throw|try|catch|finally|switch|case|break|continue|for|while|do|in|of)\b/g;
-  const strings = /(["'`])(?:(?!\1).)*\1/g;
-  const jsxTags = /<\/?([A-Z]\w*)/g;
-  const numbers = /\b(\d+\.?\d*)\b/g;
-  const booleans = /\b(true|false|null|undefined)\b/g;
-  const props = /\b(\w+)(?==)/g;
-
   // Simple approach: just color the whole line based on its nature
   if (remaining.includes("interface ") || remaining.includes("type ")) {
     return <span className="text-cyan-300">{remaining}</span>;
   }
 
-  // Default: return with basic keyword coloring via dangerouslySetInnerHTML is unsafe,
-  // so we use a simple approach
-  let colored = remaining;
   // Return as plain colored text for safety
   return <span>{remaining}</span>;
 }
